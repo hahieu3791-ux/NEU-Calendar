@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ cá nhân & Hỗ trợ – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content">
+    <div style="margin-bottom: 24px;">
+      <h1 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 4px;">Cài đặt tài khoản & Hỗ trợ</h1>
+      <p style="font-size: 13.5px; color: var(--text-muted);">Quản lý hồ sơ sinh viên, mật khẩu đăng nhập và gửi phản hồi kỹ thuật</p>
+    </div>
+
+    <div class="profile-layout">
+      <!-- Left Tab Nav -->
+      <div class="profile-nav-card">
+        <button class="profile-tab-btn active" id="tab-btn-info">
+          <i data-lucide="user" style="width: 18px; height: 18px;"></i>
+          <span>Thông tin cá nhân</span>
+        </button>
+        <button class="profile-tab-btn" id="tab-btn-pwd">
+          <i data-lucide="lock" style="width: 18px; height: 18px;"></i>
+          <span>Đổi mật khẩu</span>
+        </button>
+        <button class="profile-tab-btn" id="tab-btn-support">
+          <i data-lucide="life-buoy" style="width: 18px; height: 18px;"></i>
+          <span>Hỗ trợ kỹ thuật</span>
+        </button>
+      </div>
+
+      <!-- Right Tab Content -->
+      <div class="profile-content-card">
+        <!-- Tab 1: Personal Info -->
+        <div id="tab-content-info">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 18px;">Thông tin sinh viên</h3>
+          <form id="profile-info-form">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+              <div class="user-avatar" style="width: 64px; height: 64px; font-size: 22px;" id="profile-avatar-box">
+                M
+              </div>
+              <div>
+                <h4 style="font-size: 16px; font-weight: 700;" id="display-full-name">Nguyễn Minh Anh</h4>
+                <p style="font-size: 13px; color: var(--text-muted);" id="display-email">demo@neu.edu.vn</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="prof-name">Họ và tên</label>
+              <input type="text" id="prof-name" class="form-input" required />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label class="form-label" for="prof-code">Mã sinh viên (MSSV)</label>
+                <input type="text" id="prof-code" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="prof-cohort">Khóa sinh viên</label>
+                <input type="text" id="prof-cohort" class="form-input" placeholder="K64 / K65" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="prof-faculty">Viện / Khoa quản lý</label>
+              <input type="text" id="prof-faculty" class="form-input" placeholder="Viện Công nghệ thông tin & Kinh tế số" />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="save-info-btn">
+              <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+              <span>Cập nhật thông tin</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Tab 2: Change Password -->
+        <div id="tab-content-pwd" style="display: none;">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 18px;">Đổi mật khẩu tài khoản</h3>
+          <form id="change-pwd-form" style="max-width: 440px;">
+            <div class="form-group">
+              <label class="form-label" for="old-pwd">Mật khẩu hiện tại</label>
+              <input type="password" id="old-pwd" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="new-pwd">Mật khẩu mới (tối thiểu 6 ký tự)</label>
+              <input type="password" id="new-pwd" class="form-input" minlength="6" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirm-pwd">Nhập lại mật khẩu mới</label>
+              <input type="password" id="confirm-pwd" class="form-input" minlength="6" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="save-pwd-btn">
+              <i data-lucide="lock" style="width: 16px; height: 16px;"></i>
+              <span>Lưu mật khẩu mới</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Tab 3: Support Request -->
+        <div id="tab-content-support" style="display: none;">
+          <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Gửi yêu cầu hỗ trợ kỹ thuật</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Gặp lỗi thời khóa biểu, lịch thi hay thắc mắc về trợ lý AI? Hãy gửi thông tin cho đội ngũ phát triển.</p>
+
+          <form id="support-form" style="margin-bottom: 32px;">
+            <div class="form-group">
+              <label class="form-label" for="sup-subject">Tiêu đề yêu cầu <span style="color: #DC2626;">*</span></label>
+              <input type="text" id="sup-subject" class="form-input" placeholder="Ví dụ: Lỗi không hiển thị phòng học A1-502" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sup-msg">Chi tiết vấn đề <span style="color: #DC2626;">*</span></label>
+              <textarea id="sup-msg" class="form-textarea" placeholder="Mô tả cụ thể trường hợp bạn gặp phải..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="send-sup-btn">
+              <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+              <span>Gửi yêu cầu</span>
+            </button>
+          </form>
+
+          <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 24px;" />
+
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Lịch sử yêu cầu đã gửi</h4>
+          <div id="support-history-list">
+            <p style="color: var(--text-muted); font-size: 13px;">Đang tải...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/profile.js"></script>
+</body>
+</html>

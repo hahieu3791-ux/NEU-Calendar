@@ -1,0 +1,130 @@
+/* Exams Page Styles */
+
+.exams-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exam-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+}
+
+.exam-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #CBD5E1;
+}
+
+.exam-card.critical {
+  border-left: 4px solid #DC2626;
+}
+
+.exam-card.warning {
+  border-left: 4px solid #D97706;
+}
+
+.exam-card.normal {
+  border-left: 4px solid var(--primary-blue);
+}
+
+.exam-info-col {
+  flex: 1;
+}
+
+.exam-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.exam-course-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.exam-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.exam-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exam-countdown-col {
+  text-align: center;
+  padding: 0 16px;
+  border-left: 1px solid var(--border-color);
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.exam-countdown-days {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.exam-countdown-days.critical {
+  color: #DC2626;
+}
+
+.exam-countdown-days.warning {
+  color: #D97706;
+}
+
+.exam-countdown-days.normal {
+  color: var(--primary-blue);
+}
+
+.exam-countdown-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.exam-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .exam-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .exam-countdown-col {
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .exam-actions-col {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}

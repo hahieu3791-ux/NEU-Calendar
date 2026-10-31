@@ -1,0 +1,213 @@
+/* Dashboard Page Styles */
+
+/* Header Hero */
+.dashboard-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero-text-col {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-date-sub {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-date-sub::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-blue);
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 6px;
+}
+
+.hero-summary {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.hero-summary strong {
+  color: var(--text-main);
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 2-Column Grid Layout (Max 4 main blocks) */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+}
+
+/* Left Column */
+.dashboard-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Right Column */
+.dashboard-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* AI Copilot Box */
+.ai-copilot-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F5F7FF 100%);
+  border: 1px solid #C7D2FE;
+}
+
+.ai-copilot-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ai-copilot-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #4F46E5;
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-copilot-tag {
+  background-color: var(--primary-navy);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  margin-left: auto;
+}
+
+.ai-copilot-body {
+  font-size: 13.5px;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* Exam Countdown Box */
+.exam-countdown-card {
+  background: #FFFFFF;
+}
+
+.exam-item-mini {
+  padding: 14px;
+  background-color: #F8FAFC;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.exam-item-mini-info h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.exam-item-mini-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.exam-countdown-badge {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.exam-days-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: #DC2626;
+  line-height: 1;
+}
+
+.exam-days-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Task Item in Dashboard */
+.task-item-dash {
+  padding: 14px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: #FFFFFF;
+  margin-bottom: 12px;
+  transition: all 0.15s ease;
+}
+
+.task-item-dash:last-child {
+  margin-bottom: 0;
+}
+
+.task-item-dash:hover {
+  border-color: #CBD5E1;
+  box-shadow: var(--shadow-sm);
+}
+
+.task-item-dash-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.task-item-dash-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.task-item-dash-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

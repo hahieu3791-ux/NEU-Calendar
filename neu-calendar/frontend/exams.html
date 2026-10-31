@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lịch thi – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/exams.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 4px;">Lịch thi & Địa điểm thi</h1>
+        <p style="font-size: 13.5px; color: var(--text-muted);">Theo dõi ngày thi, phòng thi, số báo danh và đồng hồ đếm ngược kỳ thi tại NEU</p>
+      </div>
+
+      <button class="btn btn-primary" id="open-add-exam-btn">
+        <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+        <span>Thêm lịch thi</span>
+      </button>
+    </div>
+
+    <!-- Exams List Container -->
+    <div class="exams-container" id="exams-container">
+      <div class="skeleton" style="height: 100px;"></div>
+      <div class="skeleton" style="height: 100px;"></div>
+    </div>
+  </main>
+
+  <!-- Add / Edit Exam Modal -->
+  <div class="modal-backdrop" id="exam-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="exam-modal-title">Thêm lịch thi mới</h3>
+        <button class="modal-close-btn" id="close-exam-modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="exam-form">
+        <input type="hidden" id="exam-edit-id" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Môn thi <span style="color: #DC2626;">*</span></label>
+            <select id="exam-course" class="form-select" required>
+              <option value="">-- Chọn môn học --</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Ngày thi <span style="color: #DC2626;">*</span></label>
+              <input type="date" id="exam-date" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Giờ bắt đầu (HH:MM) <span style="color: #DC2626;">*</span></label>
+              <input type="text" id="exam-time" class="form-input" placeholder="08:00" required />
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Thời lượng thi (phút)</label>
+              <input type="number" id="exam-duration" class="form-input" value="60" min="15" max="300" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hình thức thi</label>
+              <select id="exam-type" class="form-select">
+                <option value="Trắc nghiệm máy">Trắc nghiệm máy tính</option>
+                <option value="Tự luận">Tự luận trên giấy</option>
+                <option value="Vấn đáp & Báo cáo">Vấn đáp & Báo cáo đồ án</option>
+                <option value="Giữa kỳ">Kiểm tra giữa kỳ</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Phòng thi <span style="color: #DC2626;">*</span></label>
+              <input type="text" id="exam-room" class="form-input" placeholder="Ví dụ: B2-201, A1-502" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số báo danh (SBD)</label>
+              <input type="text" id="exam-seat" class="form-input" placeholder="Ví dụ: 042 hoặc SBD-042" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Ghi chú & Yêu cầu phòng thi</label>
+            <textarea id="exam-notes" class="form-textarea" placeholder="Mang theo thẻ sinh viên, bút chì 2B, không mang điện thoại..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancel-exam-modal">Hủy</button>
+          <button type="submit" class="btn btn-primary" id="save-exam-btn">Lưu lịch thi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/exams.js"></script>
+</body>
+</html>

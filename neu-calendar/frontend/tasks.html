@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deadline & Công việc – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 4px;">Deadline & Công việc học tập</h1>
+        <p style="font-size: 13.5px; color: var(--text-muted);">Theo dõi tiến độ bài tập lớn, tiểu luận, thuyết trình và đồ án môn học</p>
+      </div>
+
+      <button class="btn btn-primary" id="open-add-task-btn">
+        <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+        <span>Thêm công việc mới</span>
+      </button>
+    </div>
+
+    <!-- Filters Bar -->
+    <div class="tasks-filter-bar">
+      <div class="tasks-filter-item">
+        <label for="filter-status">Trạng thái:</label>
+        <select id="filter-status">
+          <option value="">Tất cả</option>
+          <option value="not_started">Chưa bắt đầu</option>
+          <option value="in_progress">Đang thực hiện</option>
+          <option value="done">Đã hoàn thành</option>
+        </select>
+      </div>
+
+      <div class="tasks-filter-item">
+        <label for="filter-priority">Mức ưu tiên:</label>
+        <select id="filter-priority">
+          <option value="">Tất cả</option>
+          <option value="critical">Khẩn cấp</option>
+          <option value="high">Cao</option>
+          <option value="medium">Trung bình</option>
+          <option value="low">Thấp</option>
+        </select>
+      </div>
+
+      <div class="tasks-filter-item">
+        <label for="filter-course">Môn học:</label>
+        <select id="filter-course">
+          <option value="">Tất cả môn học</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Task Cards Container -->
+    <div class="tasks-container" id="tasks-container">
+      <div class="skeleton" style="height: 90px;"></div>
+      <div class="skeleton" style="height: 90px;"></div>
+    </div>
+  </main>
+
+  <!-- Add / Edit Task Modal -->
+  <div class="modal-backdrop" id="task-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="task-modal-title">Thêm bài tập / Deadline mới</h3>
+        <button class="modal-close-btn" id="close-task-modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="task-form">
+        <input type="hidden" id="task-edit-id" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Tên bài tập / Công việc <span style="color: #DC2626;">*</span></label>
+            <input type="text" id="task-title" class="form-input" placeholder="Ví dụ: Bài tập lớn Lập trình Web" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Môn học liên quan</label>
+            <select id="task-course" class="form-select">
+              <option value="">-- Chung (Không gắn môn cụ thể) --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Mô tả công việc</label>
+            <textarea id="task-desc" class="form-textarea" placeholder="Nội dung yêu cầu của giảng viên, link tài liệu hoặc ghi chú nhóm..."></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Hạn nộp (Deadline) <span style="color: #DC2626;">*</span></label>
+              <input type="datetime-local" id="task-due" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mức ưu tiên</label>
+              <select id="task-priority" class="form-select">
+                <option value="low">Thấp</option>
+                <option value="medium" selected>Trung bình</option>
+                <option value="high">Cao</option>
+                <option value="critical">Khẩn cấp</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Tiến độ (%)</label>
+              <input type="number" id="task-progress" class="form-input" value="0" min="0" max="100" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Thời gian ước tính (giờ)</label>
+              <input type="number" id="task-hours" class="form-input" value="2.0" step="0.5" min="0.5" max="100" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancel-task-modal">Hủy</button>
+          <button type="submit" class="btn btn-primary" id="save-task-btn">Lưu bài tập</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/tasks.js"></script>
+</body>
+</html>

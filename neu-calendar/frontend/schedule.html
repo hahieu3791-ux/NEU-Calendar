@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lịch học – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/schedule.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content">
+    <div class="schedule-header-controls">
+      <div>
+        <h1 style="font-size: 24px; font-weight: 800; color: var(--primary-navy); margin-bottom: 4px;">Thời khóa biểu sinh viên</h1>
+        <p style="font-size: 13.5px; color: var(--text-muted);">Quản lý các ca học trên lớp, thực hành và tự học tại NEU</p>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="view-toggle-group">
+          <button class="view-toggle-btn active" id="view-week-btn">Dạng tuần</button>
+          <button class="view-toggle-btn" id="view-day-btn">Hôm nay</button>
+        </div>
+
+        <button class="btn btn-primary" id="open-add-class-btn">
+          <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+          <span>Thêm ca học</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Week Grid Container -->
+    <div id="schedule-week-view" class="week-grid">
+      <!-- 7 columns for Monday to Sunday rendered by JS -->
+    </div>
+
+    <!-- Day View Container (hidden by default) -->
+    <div id="schedule-day-view" class="schedule-day-container" style="display: none; max-width: 800px; margin: 0 auto;">
+      <!-- Single day timeline rendered by JS -->
+    </div>
+  </main>
+
+  <!-- Add / Edit Class Modal -->
+  <div class="modal-backdrop" id="class-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="class-modal-title">Thêm lịch học mới</h3>
+        <button class="modal-close-btn" id="close-class-modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="class-form">
+        <input type="hidden" id="class-edit-id" />
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Môn học <span style="color: #DC2626;">*</span></label>
+            <select id="class-course" class="form-select" required>
+              <option value="">-- Chọn môn học --</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Thứ trong tuần <span style="color: #DC2626;">*</span></label>
+              <select id="class-day" class="form-select" required>
+                <option value="2">Thứ Hai</option>
+                <option value="3">Thứ Ba</option>
+                <option value="4">Thứ Tư</option>
+                <option value="5">Thứ Năm</option>
+                <option value="6">Thứ Sáu</option>
+                <option value="7">Thứ Bảy</option>
+                <option value="8">Chủ Nhật</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Hình thức</label>
+              <select id="class-type" class="form-select">
+                <option value="lecture">Lý thuyết trên lớp</option>
+                <option value="lab">Thực hành máy tính / Lab</option>
+                <option value="self_study">Tự học có hướng dẫn</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Từ tiết</label>
+              <select id="class-start-period" class="form-select">
+                <option value="1">Tiết 1 (06:45)</option>
+                <option value="2">Tiết 2 (07:40)</option>
+                <option value="3">Tiết 3 (08:40)</option>
+                <option value="4">Tiết 4 (09:40)</option>
+                <option value="5">Tiết 5 (10:35)</option>
+                <option value="6">Tiết 6 (11:30)</option>
+                <option value="7">Tiết 7 (12:45)</option>
+                <option value="8">Tiết 8 (13:40)</option>
+                <option value="9">Tiết 9 (14:40)</option>
+                <option value="10">Tiết 10 (15:40)</option>
+                <option value="11">Tiết 11 (16:35)</option>
+                <option value="12">Tiết 12 (17:30)</option>
+                <option value="13">Tiết 13 (18:15)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Đến tiết</label>
+              <select id="class-end-period" class="form-select">
+                <option value="3">Tiết 3 (09:30)</option>
+                <option value="6">Tiết 6 (12:20)</option>
+                <option value="9">Tiết 9 (15:30)</option>
+                <option value="12">Tiết 12 (18:20)</option>
+                <option value="15">Tiết 15 (20:55)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Giờ bắt đầu (HH:MM)</label>
+              <input type="text" id="class-start-time" class="form-input" placeholder="07:00" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Giờ kết thúc (HH:MM)</label>
+              <input type="text" id="class-end-time" class="form-input" placeholder="09:30" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phòng học <span style="color: #DC2626;">*</span></label>
+            <input type="text" id="class-room" class="form-input" placeholder="Ví dụ: A1-502, B2-405, C1-201" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Tuần bắt đầu</label>
+              <input type="number" id="class-week-from" class="form-input" value="1" min="1" max="30" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tuần kết thúc</label>
+              <input type="number" id="class-week-to" class="form-input" value="16" min="1" max="30" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancel-class-modal">Hủy</button>
+          <button type="submit" class="btn btn-primary" id="save-class-btn">Lưu ca học</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/schedule.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEU Calendar – Smart Academic Planner</title>
+  <script type="module">
+    import { getAccessToken } from "./js/auth.js";
+    const token = getAccessToken();
+    if (token) {
+      window.location.replace("dashboard.html");
+    } else {
+      window.location.replace("login.html");
+    }
+  </script>
+</head>
+<body style="background-color: #F8FAFC; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; color: #64748B;">
+  <p>Đang chuyển hướng đến NEU Calendar...</p>
+</body>
+</html>

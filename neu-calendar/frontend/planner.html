@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kế hoạch học tập – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/planner.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content">
+    <!-- Planner Hero -->
+    <div class="planner-hero-card">
+      <div class="planner-hero-text">
+        <h2>Phân bổ lịch tự học thông minh với AI Copilot</h2>
+        <p>Hệ thống tự động tính toán các khung giờ trống không trùng ca học, ưu tiên giải quyết deadline gấp và ôn tập cho các môn thi sắp tới.</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-primary" id="ai-generate-plan-btn" style="background-color: #FFFFFF; color: var(--primary-navy); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <i data-lucide="sparkles" style="width: 17px; height: 17px; color: #4F46E5;"></i>
+          <span>Tạo kế hoạch AI (7 ngày)</span>
+        </button>
+        <button class="btn btn-outline" id="open-manual-plan-btn" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); color: #FFFFFF;">
+          <i data-lucide="plus" style="width: 17px; height: 17px;"></i>
+          <span>Thêm phiên học thủ công</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="plan-stats-bar">
+      <div class="plan-stat-card">
+        <div class="plan-stat-icon">
+          <i data-lucide="calendar" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <div class="plan-stat-val" id="stat-plan-title">Đang tải...</div>
+          <div class="plan-stat-lbl">Kế hoạch hiện tại</div>
+        </div>
+      </div>
+
+      <div class="plan-stat-card">
+        <div class="plan-stat-icon">
+          <i data-lucide="check-circle" style="width: 22px; height: 22px; color: #059669;"></i>
+        </div>
+        <div>
+          <div class="plan-stat-val" id="stat-items-done">0/0</div>
+          <div class="plan-stat-lbl">Phiên học đã hoàn thành</div>
+        </div>
+      </div>
+
+      <div class="plan-stat-card">
+        <div class="plan-stat-icon">
+          <i data-lucide="clock" style="width: 22px; height: 22px; color: #4F46E5;"></i>
+        </div>
+        <div>
+          <div class="plan-stat-val" id="stat-total-hours">0h</div>
+          <div class="plan-stat-lbl">Tổng giờ tự học phân bổ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Plan Items List -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-box">
+          <i data-lucide="list-checks" style="width: 20px; height: 20px; color: var(--primary-blue);"></i>
+          <h3 id="plan-section-title">Danh sách các phiên học đã lên lịch</h3>
+        </div>
+        <button class="btn btn-outline btn-sm" id="archive-plan-btn" style="color: #DC2626;">
+          <i data-lucide="archive" style="width: 14px; height: 14px;"></i>
+          <span>Lưu trữ kế hoạch</span>
+        </button>
+      </div>
+
+      <div class="plan-items-list" id="plan-items-container">
+        <div class="skeleton" style="height: 75px;"></div>
+        <div class="skeleton" style="height: 75px;"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Manual Add Plan Item Modal -->
+  <div class="modal-backdrop" id="manual-plan-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Thêm phiên tự học thủ công</h3>
+        <button class="modal-close-btn" id="close-manual-modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="manual-plan-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Tên phiên học / Mục tiêu <span style="color: #DC2626;">*</span></label>
+            <input type="text" id="mpi-title" class="form-input" placeholder="Ví dụ: Ôn tập chương 3 Mạng máy tính" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Thời gian bắt đầu <span style="color: #DC2626;">*</span></label>
+              <input type="datetime-local" id="mpi-start" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Thời gian kết thúc <span style="color: #DC2626;">*</span></label>
+              <input type="datetime-local" id="mpi-end" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Lý do / Trọng tâm</label>
+            <input type="text" id="mpi-reason" class="form-input" placeholder="Ví dụ: Tự học cá nhân, chuẩn bị bài giảng ngày mai..." />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancel-manual-modal">Hủy</button>
+          <button type="submit" class="btn btn-primary">Thêm vào kế hoạch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/planner.js"></script>
+</body>
+</html>

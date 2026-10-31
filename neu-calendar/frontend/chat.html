@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trợ lý AI – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav injected by nav.js -->
+
+  <main class="main-content" style="padding-bottom: 20px;">
+    <div class="chat-wrapper">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar-ai">
+            <i data-lucide="bot" style="width: 20px; height: 20px;"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--primary-navy); margin-bottom: 2px;">NEU Copilot – Trợ lý học tập</h3>
+            <span style="font-size: 11.5px; color: #10B981; display: inline-flex; align-items: center; gap: 4px;">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10B981;"></span>
+              Trực tuyến • Kết nối thời khóa biểu thực tế
+            </span>
+          </div>
+        </div>
+
+        <button class="btn btn-outline btn-sm" id="clear-history-btn" title="Xóa lịch sử hội thoại">
+          <i data-lucide="trash-2" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+          <span>Xóa hội thoại</span>
+        </button>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="chat-messages-container" id="chat-messages">
+        <!-- Messages rendered by JS -->
+      </div>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="quick-suggestions-bar" id="suggestions-bar">
+        <button class="suggestion-chip">Hôm nay mình có ca học nào không?</button>
+        <button class="suggestion-chip">Các deadline bài tập cần nộp tuần này?</button>
+        <button class="suggestion-chip">Lịch thi và số báo danh môn tiếp theo?</button>
+        <button class="suggestion-chip">Gợi ý phân bổ thời gian ôn tập tối nay?</button>
+      </div>
+
+      <!-- Input Bar -->
+      <form class="chat-input-bar" id="chat-form">
+        <input type="text" id="chat-input" class="chat-input" placeholder="Hỏi NEU Copilot về lịch học, phòng học, deadline hay lịch thi..." autocomplete="off" />
+        <button type="submit" id="send-btn" class="btn btn-primary" style="border-radius: var(--radius-full); padding: 10px 20px;">
+          <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+          <span>Gửi</span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/chat.js"></script>
+</body>
+</html>

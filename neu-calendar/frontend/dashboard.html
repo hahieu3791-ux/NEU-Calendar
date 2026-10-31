@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tổng quan – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Nav will be injected by nav.js -->
+
+  <main class="main-content">
+    <!-- Top Alert Banner (if critical/warning alert exists) -->
+    <div id="top-alert-banner-container"></div>
+
+    <!-- Header Hero -->
+    <section class="dashboard-hero">
+      <div class="hero-text-col">
+        <div class="hero-date-sub" id="hero-date-text">Đang tải ngày...</div>
+        <h1 class="hero-title" id="hero-greeting">Chào buổi sáng!</h1>
+        <p class="hero-summary" id="hero-summary-text">Đang tải dữ liệu học tập hôm nay...</p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-outline" id="quick-add-task-btn">
+          <i data-lucide="check-square" style="width: 16px; height: 16px;"></i>
+          <span>Thêm công việc (+)</span>
+        </button>
+        <button class="btn btn-outline" id="quick-add-class-btn">
+          <i data-lucide="calendar-plus" style="width: 16px; height: 16px;"></i>
+          <span>Thêm lịch học (+)</span>
+        </button>
+        <button class="btn btn-primary" id="quick-ai-plan-btn" style="background-color: var(--primary-navy);">
+          <i data-lucide="sparkles" style="width: 16px; height: 16px; color: #FDE047;"></i>
+          <span>Tạo kế hoạch AI</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2-Column Grid (Max 4 main blocks) -->
+    <div class="dashboard-grid">
+      <!-- Left Column -->
+      <div class="dashboard-left-col">
+        <!-- Block 1: Today's Timeline -->
+        <div class="card" id="timeline-card">
+          <div class="card-header">
+            <div class="card-title-box">
+              <i data-lucide="calendar-clock" style="width: 20px; height: 20px; color: var(--primary-blue);"></i>
+              <h3>Lịch trình hôm nay</h3>
+              <span class="card-badge" id="timeline-count-badge">0 Mục</span>
+            </div>
+            <a href="schedule.html" class="btn btn-outline btn-sm" style="font-size: 12px;">
+              <span>Xem dạng tuần</span>
+              <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+            </a>
+          </div>
+
+          <div class="timeline" id="today-timeline">
+            <!-- Timeline items rendered by JS -->
+            <div class="skeleton" style="height: 90px; margin-bottom: 12px;"></div>
+            <div class="skeleton" style="height: 90px;"></div>
+          </div>
+        </div>
+
+        <!-- Block 2: Upcoming Deadlines & Tasks -->
+        <div class="card" id="tasks-card">
+          <div class="card-header">
+            <div class="card-title-box">
+              <i data-lucide="alert-circle" style="width: 20px; height: 20px; color: #D97706;"></i>
+              <h3>Công việc & Hạn nộp sắp tới</h3>
+            </div>
+            <a href="tasks.html" class="btn btn-outline btn-sm" style="font-size: 12px;">
+              <span>Tất cả bài tập</span>
+              <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
+            </a>
+          </div>
+
+          <div id="upcoming-tasks-list">
+            <!-- Tasks rendered by JS -->
+            <div class="skeleton" style="height: 70px; margin-bottom: 10px;"></div>
+            <div class="skeleton" style="height: 70px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="dashboard-right-col">
+        <!-- Block 3: AI Copilot Card -->
+        <div class="card ai-copilot-card">
+          <div class="ai-copilot-header">
+            <div class="ai-copilot-icon">
+              <i data-lucide="sparkles" style="width: 18px; height: 18px;"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 15px; font-weight: 700;">Trợ lý học tập AI</h3>
+              <p style="font-size: 11.5px; color: var(--text-muted);">Gợi ý tối ưu hóa thời gian</p>
+            </div>
+            <span class="ai-copilot-tag">NEU Copilot</span>
+          </div>
+
+          <div class="ai-copilot-body" id="ai-suggestion-text">
+            Đang phân tích thời khóa biểu và deadline...
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <a href="planner.html" class="btn btn-primary" style="flex: 1; font-size: 13px;">
+              <span>Xem kế hoạch AI chi tiết</span>
+            </a>
+            <a href="chat.html" class="btn btn-outline btn-sm" title="Hỏi đáp với AI">
+              <i data-lucide="bot" style="width: 16px; height: 16px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Block 4: Nearest Exam Countdown Card -->
+        <div class="card exam-countdown-card">
+          <div class="card-header">
+            <div class="card-title-box">
+              <i data-lucide="award" style="width: 20px; height: 20px; color: #DC2626;"></i>
+              <h3>Lịch thi sắp tới</h3>
+            </div>
+            <a href="exams.html" class="btn btn-outline btn-sm" style="font-size: 12px;">
+              <span>Xem tất cả</span>
+            </a>
+          </div>
+
+          <div id="nearest-exam-box">
+            <div class="skeleton" style="height: 80px;"></div>
+          </div>
+        </div>
+
+        <!-- Progress Widget -->
+        <div class="card" style="padding: 16px 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 13px; font-weight: 700; color: var(--text-main);">Tiến độ học kỳ</span>
+            <span class="card-badge" id="study-week-badge">Tuần 8 / 16</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; text-align: center;">
+              <div style="font-size: 18px; font-weight: 800; color: var(--primary-blue);" id="stat-study-hours">0h</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Tự học hôm nay</div>
+            </div>
+            <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: 6px; padding: 10px; text-align: center;">
+              <div style="font-size: 18px; font-weight: 800; color: #059669;" id="stat-task-done">0/0</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Deadline hoàn thành</div>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill done" id="study-progress-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Quick Add Task Modal -->
+  <div class="modal-backdrop" id="quick-task-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Thêm công việc / Deadline</h3>
+        <button class="modal-close-btn" id="close-quick-task-modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+      <form id="quick-task-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Tên công việc / Bài tập <span style="color: #DC2626;">*</span></label>
+            <input type="text" id="qt-title" class="form-input" placeholder="Ví dụ: Bài tập lớn Lập trình Web" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Môn học liên quan</label>
+            <select id="qt-course" class="form-select">
+              <option value="">-- Chung (Không gắn môn cụ thể) --</option>
+            </select>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Hạn chót (Deadline) <span style="color: #DC2626;">*</span></label>
+              <input type="datetime-local" id="qt-due" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mức ưu tiên</label>
+              <select id="qt-priority" class="form-select">
+                <option value="low">Thấp</option>
+                <option value="medium" selected>Trung bình</option>
+                <option value="high">Cao</option>
+                <option value="critical">Khẩn cấp</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Thời gian dự kiến (giờ)</label>
+            <input type="number" id="qt-hours" class="form-input" value="2.0" step="0.5" min="0.5" max="50" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="cancel-quick-task">Hủy</button>
+          <button type="submit" class="btn btn-primary">Lưu công việc</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/dashboard.js"></script>
+</body>
+</html>

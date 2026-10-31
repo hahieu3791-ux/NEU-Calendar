@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký tài khoản – NEU Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body style="justify-content: center; align-items: center; background: radial-gradient(circle at top right, #EEF2FF 0%, #F8FAFC 60%); padding: 40px 0;">
+  <div style="width: 100%; max-width: 480px; padding: 20px;">
+    <!-- Brand Box -->
+    <div style="text-align: center; margin-bottom: 24px;">
+      <div style="width: 46px; height: 46px; background: linear-gradient(135deg, #0F2A4A 0%, #1D4ED8 100%); border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; margin-bottom: 10px;">
+        <i data-lucide="calendar-check" style="width: 24px; height: 24px;"></i>
+      </div>
+      <h1 style="font-size: 20px; font-weight: 800; color: var(--primary-navy); margin-bottom: 4px;">NEU Calendar</h1>
+      <p style="font-size: 13px; color: var(--text-muted);">Tạo tài khoản quản lý học tập cá nhân</p>
+    </div>
+
+    <!-- Register Card -->
+    <div class="card" style="box-shadow: var(--shadow-lg); border-radius: var(--radius-lg); padding: 28px;">
+      <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 18px;">Thông tin sinh viên</h2>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label class="form-label" for="full-name">Họ và tên <span style="color: #DC2626;">*</span></label>
+          <input type="text" id="full-name" class="form-input" placeholder="Nguyễn Văn A" required />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label" for="student-code">Mã sinh viên (MSSV)</label>
+            <input type="text" id="student-code" class="form-input" placeholder="11210001" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cohort">Khóa học</label>
+            <input type="text" id="cohort" class="form-input" placeholder="K64 / K65" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="faculty">Viện / Khoa đào tạo</label>
+          <input type="text" id="faculty" class="form-input" placeholder="Viện CNTT & Kinh tế số, Viện Ngân hàng..." />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email sinh viên <span style="color: #DC2626;">*</span></label>
+          <input type="email" id="email" class="form-input" placeholder="ten.mssv@neu.edu.vn" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Mật khẩu (tối thiểu 6 ký tự) <span style="color: #DC2626;">*</span></label>
+          <input type="password" id="password" class="form-input" placeholder="••••••••" minlength="6" required />
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; padding: 11px; margin-top: 10px; font-size: 14px;">
+          <i data-lucide="user-plus" style="width: 18px; height: 18px;"></i>
+          <span>Đăng ký ngay</span>
+        </button>
+      </form>
+
+      <p style="text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 20px;">
+        Đã có tài khoản? <a href="login.html" style="color: var(--primary-blue); font-weight: 600;">Đăng nhập</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/pages/register.js"></script>
+</body>
+</html>
